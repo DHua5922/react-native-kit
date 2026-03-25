@@ -3,7 +3,7 @@ name: Deploy Docusaurus to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - fix-documentation-deployment
   workflow_dispatch:
 
 permissions:
@@ -37,7 +37,7 @@ jobs:
       - name: Install npm package for react-native-kit
         run: |
           cd documentation
-          yarn add react-native-kit
+          yarn add @dhua5922/react-native-kit
 
       - name: Install dependencies
         working-directory: documentation
