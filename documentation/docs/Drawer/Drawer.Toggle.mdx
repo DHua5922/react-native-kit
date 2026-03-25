@@ -1,0 +1,36 @@
+---
+sidebar_position: 1
+---
+
+# Drawer.Toggle
+
+Button for showing drawer.
+
+## Import
+
+```jsx
+import { Drawer } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  return (
+    <>
+      <Drawer.Toggle />
+      <Drawer.Toggle Icon={Ionicons} name="ios-menu-outline" />
+    </>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Expo Icons](https://docs.expo.dev/guides/icons/#properties)
+:::
+
+| Name   | Type | Default                                 | Description                            |
+| ------ | ---- | --------------------------------------- | -------------------------------------- |
+| `Icon` |      | [Feather](https://icons.expo.fyi/Index) | Icon type, such as Feather or IonIcons |

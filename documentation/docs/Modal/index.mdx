@@ -1,0 +1,48 @@
+---
+sidebar_position: 1
+---
+
+# Modal
+
+Add dialogs to your site for lightboxes, user notifications, or completely custom content.
+
+## Import
+
+```jsx
+import { Modal } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [open, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
+
+      <Modal visible={open} onRequestClose={() => setIsOpen(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Header</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>Body</Modal.Body>
+
+        <Modal.Footer>Footer</Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Modal](https://reactnative.dev/docs/modal)
+:::
+
+| Name             | Type         | Default | Description                                  |
+| ---------------- | ------------ | ------- | -------------------------------------------- |
+| `visible`        | `boolean`    |         | Show modal when true; otherwise, hide modal. |
+| `onRequestClose` | `() => void` |         | Callback fired when closing the modal.       |

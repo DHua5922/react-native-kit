@@ -1,0 +1,81 @@
+---
+sidebar_position: 1
+---
+
+# Alert
+
+Provide contextual feedback messages for typical user actions.
+
+## Import
+
+```jsx
+import { Alert } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [showSuccess, setShowSuccess] = useState(true);
+  const [showDanger, setShowDanger] = useState(true);
+  const [showWarning, setShowWarning] = useState(true);
+  const [showInfo, setShowInfo] = useState(true);
+  const [showDefault, setShowDefault] = useState(true);
+
+  return (
+    <Div>
+      <Button
+        onPress={() => {
+          setShowSuccess(true);
+          setShowDanger(true);
+          setShowWarning(true);
+          setShowInfo(true);
+          setShowDefault(true);
+        }}
+        style={{ marginBottom: 10 }}
+      >
+        Show all alerts
+      </Button>
+
+      {showSuccess && (
+        <Alert type="success" dismissible onClose={() => setShowSuccess(false)}>
+          Success
+        </Alert>
+      )}
+      {showDanger && (
+        <Alert type="danger" dismissible onClose={() => setShowDanger(false)}>
+          Danger
+        </Alert>
+      )}
+      {showWarning && (
+        <Alert type="warning" dismissible onClose={() => setShowWarning(false)}>
+          Warning
+        </Alert>
+      )}
+      {showInfo && (
+        <Alert type="info" dismissible onClose={() => setShowInfo(false)}>
+          Info
+        </Alert>
+      )}
+      {showDefault && (
+        <Alert dismissible onClose={() => setShowDefault(false)}>
+          Default
+        </Alert>
+      )}
+    </Div>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Row](/docs/Row)
+:::
+
+| Name          | Type                                                 | Default        | Description                                                              |
+| ------------- | ---------------------------------------------------- | -------------- | ------------------------------------------------------------------------ |
+| `type`        | `success`, `danger`, `warning`, `info`, or `default` | `default`      | Type of alert                                                            |
+| `dismissible` | `boolean`                                            | `false`        | Show button for dismissing alert                                         |
+| `onClose`     | `() => void`                                         |                | Callback fired when closing alert.                                       |
+| `CloseButton` | `React.ReactNode`                                    | `Button.Close` | Custom close button. If not provided, default close button will be used. |

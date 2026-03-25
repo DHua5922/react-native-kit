@@ -1,0 +1,33 @@
+---
+sidebar_position: 1
+---
+
+# Input.Search
+
+## Import
+
+```jsx
+import { Input } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [text, setText] = useState("");
+
+  return (
+    <Input.Search
+      placeholder="Enter text for search here"
+      value={text}
+      onChange={(text) => setText(text)}
+    />
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Input.Text](/docs/Input/Input.Text)
+:::

@@ -1,0 +1,39 @@
+---
+sidebar_position: 2
+---
+
+# Animation.FadeIn
+
+## Import
+
+```jsx
+import { Animation } from "react-native-kit";
+```
+
+## Examles
+
+```jsx
+function Example() {
+  const animationConfig = {
+    duration: 2000,
+    useNativeDriver: true,
+    toValue: 1,
+  };
+
+  return (
+    <Animation.FadeIn config={animationConfig}>
+      Fade In Animation
+    </Animation.FadeIn>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Animated.View](https://reactnative.dev/docs/animations#animated-api)
+:::
+
+| Name     | Type   | Default | Description                                                                                |
+| -------- | ------ | ------- | ------------------------------------------------------------------------------------------ |
+| `config` | object | `{}`    | [Configuration object for Animated.timing()](https://reactnative.dev/docs/animated#timing) |

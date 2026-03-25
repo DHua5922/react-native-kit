@@ -1,0 +1,34 @@
+---
+sidebar_position: 5
+---
+
+# Calendar.Left
+
+## Import
+
+```jsx
+import { Calendar } from "react-native-kit";
+```
+
+## Basic Example
+
+```jsx
+function Example() {
+  return (
+    <>
+      <Calendar.Left />
+      <Calendar.Left>{"<"}</Calendar.Left>
+    </>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Pressable](https://reactnative.dev/docs/pressable)
+:::
+
+| Name      | Type                   | Default | Description                                                  |
+| --------- | ---------------------- | ------- | ------------------------------------------------------------ |
+| `onPress` | `(date: Date) => void` |         | Callback fired when pressing button to go to previous month. |

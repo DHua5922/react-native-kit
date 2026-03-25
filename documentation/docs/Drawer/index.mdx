@@ -1,0 +1,42 @@
+---
+sidebar_position: 1
+---
+
+# Drawer
+
+## Import
+
+```jsx
+import { Drawer } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  return (
+    <Div style={{ height: 200 }}>
+      <Drawer.Toggle onPress={() => setOpenDrawer(true)} />
+
+      <Drawer width="25%" show={openDrawer} onHide={() => setOpenDrawer(false)}>
+        <Drawer.Header closeButton />
+        <Drawer.Body>Body</Drawer.Body>
+      </Drawer>
+    </Div>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Animated.View](https://reactnative.dev/docs/animations#animated-api)
+:::
+
+| Name     | Type                 | Default      | Description                                 |
+| -------- | -------------------- | ------------ | ------------------------------------------- |
+| `show`   | `boolean`            |              | Show drawer if true; otherwise, hide drawer |
+| `onHide` | `() => void`         |              | Callback fired when closing drawer.         |
+| `width`  | `number` or `string` | 500 or "25%" | Width of drawer.                            |

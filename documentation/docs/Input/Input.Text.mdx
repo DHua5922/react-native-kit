@@ -1,0 +1,51 @@
+---
+sidebar_position: 1
+---
+
+# Input.Text
+
+## Import
+
+```jsx
+import { Input } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [text, setText] = useState("");
+
+  return (
+    <Input.Text
+      placeholder="Enter text here"
+      value={text}
+      onChange={(text) => setText(text)}
+      leftChildren={<Entypo name="magnifying-glass" size={24} color="black" />}
+      rightChildren={
+        <Entypo
+          name="cross"
+          size={24}
+          color="black"
+          onPress={() => setText("")}
+        />
+      }
+    />
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [TextInput](https://reactnative.dev/docs/textinput).
+:::
+
+| Name             | Type                     | Default | Description                               |
+| ---------------- | ------------------------ | ------- | ----------------------------------------- |
+| `leftChildren`   | `React.ReactNode`        |         | Children to render on left side of input  |
+| `rightChildren`  | `React.ReactNode`        |         | Children to render on right side of input |
+| `disabled`       | `boolean`                | `false` | Flag for indicating if input is disabled  |
+| `focused`        | `boolean`                | `false` | Flag for indicating if input is focused   |
+| `onChange`       | `(text: string) => void` |         | Callback fired when typing in input       |
+| `containerProps` | `object`                 |         | Props for input container                 |

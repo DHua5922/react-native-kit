@@ -1,0 +1,33 @@
+---
+sidebar_position: 1
+---
+
+# Input.Number
+
+## Import
+
+```jsx
+import { Input } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [number, setNumber] = useState("");
+
+  return (
+    <Input.Number
+      placeholder="Enter number here"
+      value={number}
+      onChange={(number) => setNumber(number)}
+    />
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Input.Text](/docs/Input/Input.Text)
+:::

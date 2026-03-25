@@ -1,0 +1,303 @@
+import { Button, Calendar, Div, Input, Menu, Row } from "react-native-kit";
+import Page from "../../functional/Page";
+import Code from "../../functional/Code";
+import Documentation from "../../functional/Documentation";
+import React, { useState } from "react";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { packageName, pageNames } from "../../../constants";
+import { useRef } from "react";
+import { ScrollView, View } from "react-native";
+import { useEffect } from "react";
+import { format } from "date-fns";
+
+const commonInputsExampleCode = `function Example() {
+    const [text, setText] = useState("");
+    const [textArea, setTextArea] = useState("");
+    const [number, setNumber] = useState(0);
+    const [search, setSearch] = useState("");
+    const [selected, setSelected] = useState("");
+    const [checked, setChecked] = useState(false);
+    const [radio, setRadio] = useState(false);
+    const [switched, setSwitched] = useState(false);
+    const [date, setDate] = useState(format(new Date(), "MM/dd/yyyy"));
+
+    return (
+      <>
+        <Input
+            placeholder="Enter single line text here"
+            value={text}
+            onChange={(text) => setText(text)}
+        />
+
+        <Input
+            placeholder="Enter search text here"
+            value={search}
+            onChange={(text) => setSearch(text)}
+            type="search"
+        />
+
+        <Input
+            placeholder="Enter text in this area"
+            value={textArea}
+            onChange={(text) => setTextArea(text)}
+            type="textarea"
+        />
+
+        <Input
+            placeholder="Enter number"
+            value={number}
+            onChange={(number) => setNumber(number)}
+            type="number"
+        />
+
+        <Input
+            placeholder="Choose item"
+            value={selected}
+            type="select"
+        >
+          {["Option 1", "Option 2"].map(option => (
+            <Menu.Item key={option} onPress={() => setSelected(option)}>
+              {option}
+            </Menu.Item>
+          ))}
+        </Input>
+
+        <Input
+            checked={radio}
+            onChange={(radio) => setRadio(radio)}
+            type="radio"
+        />
+
+        <Input
+            checked={switched}
+            onChange={(switched) => setSwitched(switched)}
+            type="switch"
+        />
+
+        <Input
+            checked={checked}
+            onChange={(checked) => setChecked(checked)}
+            type="checkbox"
+        />
+
+        <Input
+            value={date}
+            type="date"
+        >
+            <Calendar
+              value={new Date(date)}
+              onChange={(date) => setDate(format(date, "MM/dd/yyyy"))}
+            >
+              <Calendar.Header>
+                <Calendar.Left />
+
+                <Calendar.Title />
+
+                <Calendar.Right />
+              </Calendar.Header>
+
+              <Calendar.Weekdays />
+
+              <Calendar.Days />
+            </Calendar>
+        </Input>
+      </>
+    );
+}`;
+
+const jsonInputExampleCode = `function Example() {
+    const [value, setValue] = useState("{}");
+    const [isValidJson, setIsValidJson] = useState(false);
+    const lines = value.split("\\n");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showFormatButton, setShowFormatButton] = useState(true);
+
+    function sanitizeText(text: string) {
+      return text
+        // Convert single-quoted keys to double-quoted
+        .replace(/([{,]\\s*)'([a-zA-Z0-9_]+)'\\s*:/g, '$1"$2":')
+        // Convert unquoted keys to double-quoted
+        .replace(/([{,]\\s*)([a-zA-Z0-9_]+)(\\s*:\\s*)/g, '$1"$2"$3')
+        // Convert single quotes around values to double quotes
+        .replace(/:\\s*'([^']*)'/g, ': "$1"')
+        // Convert any remaining single-quoted values in arrays to double quotes
+        .replace(/'([^']*)'/g, '"$1"');
+    }
+
+    function parseJson(text: string) {
+      try {
+        setValue(text);
+        JSON.parse(sanitizeText(text));
+        setIsValidJson(true);
+        setShowFormatButton(true);
+      } catch (error: any) {
+        setErrorMessage(error.message);
+        setIsValidJson(false);
+      }
+    }
+
+    function formatJson() {
+      try {
+        const parsedJson = JSON.parse(sanitizeText(value));
+        const jsonString = JSON.stringify(parsedJson, null, 4);
+        setValue(jsonString);
+        setShowFormatButton(false);
+      } catch (error) {}
+    }
+
+    useEffect(() => {
+      parseJson(value);
+    }, []);
+
+    const iconSize = 16;
+    const fontSize = 14;
+    const disabled = false;
+
+    return (
+      <Div
+        style={{
+          paddingHorizontal: 20,
+          paddingVertical: 10,
+          backgroundColor: "white",
+          opacity: disabled ? 0.3 : 1
+        }}
+      >
+        <Row
+          style={{
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+            borderBottomWidth: 1,
+            borderColor: "#cccccc"
+          }}
+        >
+          {isValidJson ? (
+            <>
+              <Button
+                type="transparent"
+                onPress={formatJson}
+                disabled={!showFormatButton}
+              >
+                {showFormatButton ? "Format" : " "}
+              </Button>
+
+              <FontAwesome name="check-circle" size={iconSize} color="green" />
+            </>
+          ) : (
+            <Row
+              style={{
+                alignItems: "center",
+                flex: 1,
+                flexWrap: "nowrap"
+              }}
+            >
+              <FontAwesome name="times-circle" size={iconSize} color="red" />
+              <Div style={{ color: "red", marginLeft: 4 }}>
+                {errorMessage}
+              </Div>
+            </Row>
+          )}
+        </Row>
+
+        <ScrollView style={{ maxHeight: 200, marginTop: 10 }}>
+          <Row>
+            <Div
+              style={{
+                marginHorizontal: 0,
+                marginRight: 10
+              }}
+            >
+              {lines.map((_, index) => (
+                <Div
+                  key={index}
+                  style={{
+                    textAlign: "right",
+                    marginRight: 5,
+                    fontSize
+                  }}
+                >
+                  {index + 1}
+                </Div>
+              ))}
+            </Div>
+
+            <Input
+              type="textarea"
+              value={value}
+              onChange={(text) => !disabled && parseJson(text)}
+              containerProps={{
+                style: {
+                  flex: 1,
+                  borderWidth: 0
+                },
+                focused: false
+              }}
+              style={{
+                fontSize,
+                whiteSpace: "nowrap",
+                padding: 0
+              }}
+            />
+          </Row>
+        </ScrollView>
+      </Div>
+    );
+}`;
+
+function InputPage(props: any) {
+  return (
+    <Page.Documentation {...props}>
+      <Documentation.Section title={pageNames.Input} />
+
+      <Documentation.Section subtitle="Import">
+        <Code.Sample>{`import { Input } from "${packageName}";`}</Code.Sample>
+      </Documentation.Section>
+
+      <Documentation.Section subtitle="Common Input Examples">
+        <Code.Editor
+          scope={{ Input, useState, Entypo, Menu, React, format, Calendar }}
+        >
+          {commonInputsExampleCode}
+        </Code.Editor>
+      </Documentation.Section>
+
+      <Documentation.Section subtitle="JSON Input Example">
+        <Code.Editor
+          scope={{
+            Input,
+            useState,
+            FontAwesome,
+            Menu,
+            React,
+            Div,
+            Row,
+            useRef,
+            ScrollView,
+            Button,
+            useEffect,
+            View,
+          }}
+        >
+          {jsonInputExampleCode}
+        </Code.Editor>
+      </Documentation.Section>
+
+      <Documentation.PropsSection
+        rows={[
+          [
+            "type",
+            "text | radio | checkbox | date | search | switch | select | number | textarea",
+            "text",
+            "Type of input",
+          ],
+        ]}
+      >
+        <Documentation.PropsNote>
+          Includes all props from input component based on type.
+        </Documentation.PropsNote>
+      </Documentation.PropsSection>
+    </Page.Documentation>
+  );
+}
+
+export default InputPage;

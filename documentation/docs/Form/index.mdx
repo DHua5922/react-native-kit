@@ -1,0 +1,43 @@
+---
+sidebar_position: 1
+---
+
+# Form
+
+## Import
+
+```jsx
+import { Form } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [text, setText] = useState("");
+  const [submittedText, setSubmittedText] = useState("");
+
+  return (
+    <>
+      <Form onSubmit={() => setSubmittedText(text)}>
+        <Form.Label required>Input Label</Form.Label>
+        <Form.Input
+          placeholder="Enter text here"
+          value={text}
+          onChange={(text) => setText(text)}
+          style={{ marginVertical: 10 }}
+        />
+        <Form.Button style={{ marginBottom: 10 }}>Submit</Form.Button>
+      </Form>
+
+      <Text>Submited Text: {submittedText}</Text>
+    </>
+  );
+}
+```
+
+## Props
+
+| Name       | Type         | Default | Description                                  |
+| ---------- | ------------ | ------- | -------------------------------------------- |
+| `onSubmit` | `() => void` |         | Callback fired for handling form submission. |

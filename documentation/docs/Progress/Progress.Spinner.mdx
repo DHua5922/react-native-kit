@@ -1,0 +1,33 @@
+---
+sidebar_position: 1
+---
+
+# Progress.Spinner
+
+Show progress of some activity with a spinner.
+
+## Import
+
+```jsx
+import { Progress } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [progress, setProgress] = useState(0);
+  setTimeout(() => setProgress(progress + 1), 500);
+  return <Progress.Spinner color="blue">{progress}%</Progress.Spinner>;
+}
+```
+
+## Props
+
+:::note
+Include all props from [Div](/docs/Div)
+:::
+
+| Name    | Type     | Default | Description                     |
+| ------- | -------- | ------- | ------------------------------- |
+| `color` | `string` |         | Color of progress bar and text. |

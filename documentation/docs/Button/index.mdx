@@ -1,0 +1,96 @@
+---
+sidebar_position: 1
+---
+
+# Button
+
+Can be text, icon, or both.
+
+## Import
+
+```jsx
+import { Button } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const style = { marginLeft: 4, marginRight: 4 };
+
+  const gapStyle = { marginBottom: 16 };
+
+  return (
+    <>
+      <Button disabled fullWidth style={gapStyle}>
+        Full Width And Disabled
+      </Button>
+
+      <Row style={gapStyle}>
+        <Button style={{ marginRight: style.marginRight }} type="primary">
+          Primary
+        </Button>
+        <Button style={style} type="success">
+          Success
+        </Button>
+        <Button style={style} type="danger">
+          Danger
+        </Button>
+        <Button style={style} type="warning">
+          Warning
+        </Button>
+        <Button style={style} type="transparent">
+          Transparent
+        </Button>
+        <Button style={style} type="light">
+          Light
+        </Button>
+        <Button style={style} type="dark">
+          Dark
+        </Button>
+        <Button style={{ marginLeft: style.marginLeft }} type="info">
+          Info
+        </Button>
+      </Row>
+
+      <Row>
+        <Button
+          style={{ marginRight: style.marginRight }}
+          type="outline-primary"
+        >
+          Primary
+        </Button>
+        <Button style={style} type="outline-success">
+          Success
+        </Button>
+        <Button style={style} type="outline-danger">
+          Danger
+        </Button>
+        <Button style={style} type="outline-warning">
+          Warning
+        </Button>
+        <Button style={style} type="outline-light">
+          Light
+        </Button>
+        <Button style={style} type="outline-dark">
+          Dark
+        </Button>
+        <Button style={{ marginLeft: style.marginLeft }} type="outline-info">
+          Info
+        </Button>
+      </Row>
+    </>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Pressable](https://reactnative.dev/docs/pressable)
+:::
+
+| Name        | Type                                                                                                                                                                                                          | Default   | Description                         |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------- |
+| `type`      | `primary`, `success`, `danger`, `warning`, `transparent`, `light`, `dark`, `info`, `outline-primary`, `outline-success`, `outline-danger`, `outline-warning`, `outline-light`, `outline-dark`, `outline-info` | `primary` | Type of button                      |
+| `fullWidth` | `boolean`                                                                                                                                                                                                     | `false`   | Make button width be 100% when true |

@@ -1,0 +1,45 @@
+---
+sidebar_position: 0
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import { Button, Col, Row } from "react-bootstrap";
+import Link from "@docusaurus/Link";
+
+# Installation
+
+<Tabs>
+  <TabItem value="npm" label="npm" default>
+
+    ```jsx
+    npm install react-native-kit
+    ```
+
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+
+    ```jsx
+    yarn add react-native-kit
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Quick Start
+
+```jsx
+import { Div } from "react-native-kit";
+
+function App() {
+  return <Div>Hello World!</Div>;
+}
+```
+
+<Link to="/docs/Accordion">
+  <Button className="btn-primary">See Components</Button>
+</Link>
+
+<Link to="/docs/Responsive">
+  <Button className="btn-primary">See Responsiveness</Button>
+</Link>

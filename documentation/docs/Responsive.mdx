@@ -1,0 +1,43 @@
+---
+sidebar_position: 0
+---
+
+# Responsive
+
+Make your app responsive to different screen sizes.
+
+## Import
+
+```jsx
+import { rem, useResponsiveUnits } from "react-native-kit";
+```
+
+## Responsive Units
+
+Use **vw**, **vh**, and **rem** to make your app responsive to different screen sizes. You can copy the code below and resize your window to see.
+
+| vw                                                                         | vh                                                                           | rem                                                                                                                                                                                                                              |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stands for viewport width. Value changes as window width is being resized. | Stands for viewport height. Value changes as window height is being resized. | Allows you to size elements (such as text, padding, margins, etc.) relative to the root element's font size, instead of the elememnt's own font size. This makes it easier to maintain consistent scaling throughout a web page. |
+| `vw(value: number): number`                                                | `vh(value: number): number`                                                  | `rem(value: number, baseFontSize = 16): number`                                                                                                                                                                                  |
+
+## Example
+
+```jsx
+function Example() {
+  const { vw, vh } = useResponsiveUnits();
+  return (
+    <Div>
+      <Div>
+        <Text bold>vw:</Text> {vw(1)}
+      </Div>
+      <Div>
+        <Text bold>vh:</Text> {vh(1)}
+      </Div>
+      <Div>
+        <Text bold>rem:</Text> {rem(1)}
+      </Div>
+    </Div>
+  );
+}
+```

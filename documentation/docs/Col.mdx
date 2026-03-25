@@ -1,0 +1,48 @@
+---
+sidebar_position: 1
+---
+
+# Col
+
+Column in row. This needs to be nested in [Row](/docs/Row) component.
+
+## Import
+
+```jsx
+import { Col } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  return (
+    <Row>
+      <Col xs={12} md={6} lg={4}>
+        Column 1
+      </Col>
+      <Col xs={12} md={6} lg={4}>
+        Column 2
+      </Col>
+      <Col xs={12} md={6} lg={4}>
+        Column 3
+      </Col>
+    </Row>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Div](/docs/Div)
+:::
+
+| Name  | Type                        | Default | Description                                                              |
+| ----- | --------------------------- | ------- | ------------------------------------------------------------------------ |
+| `xs`  | `number` (0 &le; x &le; 12) | 12      | Type of alert                                                            |
+| `sm`  | `number` (0 &le; x &le; 12) | 0       | Show button for dismissing alert                                         |
+| `md`  | `number` (0 &le; x &le; 12) | 0       | Callback fired when closing alert.                                       |
+| `lg`  | `number` (0 &le; x &le; 12) | 0       | Custom close button. If not provided, default close button will be used. |
+| `xl`  | `number` (0 &le; x &le; 12) | 0       | Custom close button. If not provided, default close button will be used. |
+| `xxl` | `number` (0 &le; x &le; 12) | 0       | Custom close button. If not provided, default close button will be used. |

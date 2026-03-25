@@ -1,0 +1,46 @@
+---
+sidebar_position: 1
+---
+
+# Accordion
+
+Build vertically collapsing accordions.
+
+## Import
+
+```jsx
+import { Accordion } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  return (
+    <Accordion activeKeys={["1"]}>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header>
+          <Accordion.Title>Header 1</Accordion.Title>
+          <Accordion.Toggle />
+        </Accordion.Header>
+        <Accordion.Body>Body 1</Accordion.Body>
+      </Accordion.Item>
+
+      <Accordion.Item eventKey="2">
+        <Accordion.Header>
+          <Accordion.Title>Header 2</Accordion.Title>
+          <Accordion.Toggle />
+        </Accordion.Header>
+        <Accordion.Body>Body 2</Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+```
+
+## Props
+
+| Name         | Type                         | Default | Description                                                            |
+| ------------ | ---------------------------- | ------- | ---------------------------------------------------------------------- |
+| `activeKeys` | `string[]`                   | `[]`    | The curreny active key that corresponds to the currently expanded card |
+| `onSelect`   | `(eventKey: string) => void` |         | Callback fired when the active item changes.                           |

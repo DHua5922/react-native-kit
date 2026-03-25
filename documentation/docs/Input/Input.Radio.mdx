@@ -1,0 +1,53 @@
+---
+sidebar_position: 1
+---
+
+# Input.Radio
+
+## Import
+
+```jsx
+import { Input } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [checked1, setChecked1] = useState(false);
+  const [checked2, setChecked2] = useState(false);
+
+  return (
+    <>
+      <Input.Radio
+        checked={checked1}
+        onChange={(checked) => setChecked1(checked)}
+        style={{ marginBottom: 12 }}
+      >
+        Radio 1
+      </Input.Radio>
+
+      <Input.Radio
+        checked={checked2}
+        onChange={(checked) => setChecked2(checked)}
+        disabled
+      >
+        Disabled radio
+      </Input.Radio>
+    </>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Pressable](https://reactnative.dev/docs/pressable)
+:::
+
+| Name       | Type                         | Default   | Description                                                |
+| ---------- | ---------------------------- | --------- | ---------------------------------------------------------- |
+| `checked`  | `boolean`                    | `false`   | Show radio as chosen; otherwise, show radio as not chosen. |
+| `onChange` | `(checked: boolean) => void` |           | Callback fired when radio has been pressed.                |
+| `size`     | `number`                     | 24        | Width and height of radio.                                 |
+| `color`    | `string`                     | `#2089dc` | Color of radio.                                            |

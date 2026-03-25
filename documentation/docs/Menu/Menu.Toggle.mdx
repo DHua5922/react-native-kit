@@ -1,0 +1,49 @@
+---
+sidebar_position: 1
+---
+
+# Menu.Toggle
+
+Button for showing menu.
+
+## Import
+
+```jsx
+import { Menu } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [showMenu, setShowMenu] = useState(false);
+
+  return (
+    <Menu.Toggle
+      showMenu={showMenu}
+      onShowMenu={() => setShowMenu(true)}
+      onHideMenu={() => setShowMenu(false)}
+    >
+      <Menu.Item>Option 1</Menu.Item>
+      <Menu.Item>Option 2</Menu.Item>
+    </Menu.Toggle>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Expo Icons](https://docs.expo.dev/guides/icons/#properties)
+:::
+
+| Name                      | Type              | Default                                 | Description                                          |
+| ------------------------- | ----------------- | --------------------------------------- | ---------------------------------------------------- |
+| `Icon`                    |                   | [Feather](https://icons.expo.fyi/Index) | Icon type, such as Feather or MaterialIcons          |
+| `IconName`                | `string`          | `more-vertical`                         | Value for name property of Icon                      |
+| `Toggle`                  | `React.ReactNode` |                                         | Alternative button for toggling menu when clicked on |
+| `showMenu`                | `boolean`         |                                         | Indicator to show menu or not.                       |
+| `onShow`                  | `() => void`      |                                         | Callback fired when showing menu for icon.           |
+| `onHide`                  | `() => void`      |                                         | Callback fired when hiding menu for icon.            |
+| `offsetMenuPosHorizontal` | `number`          |                                         | Offset for horizontal position of menu               |
+| `offsetMenuPosVertical`   | `number`          |                                         | Offset for vertical position of menu                 |

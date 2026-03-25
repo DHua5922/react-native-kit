@@ -1,0 +1,42 @@
+---
+sidebar_position: 2
+---
+
+# Calendar.Day
+
+## Import
+
+```jsx
+import { Calendar } from "react-native-kit";
+```
+
+## Basic Example
+
+```jsx
+function Example() {
+  const [date, setDate] = useState(new Date());
+
+  return (
+    <Calendar.Day
+      value={date}
+      onPress={(date) => setDate(date)}
+      key={date}
+      textStyle={{ color: "#ffffff" }}
+    >
+      {date.getDate()}
+    </Calendar.Day>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Pressable](https://reactnative.dev/docs/pressable)
+:::
+
+| Name        | Type                   | Default | Description                        |
+| ----------- | ---------------------- | ------- | ---------------------------------- |
+| `value`     | `Date`                 |         | Date of day.                       |
+| `onPress`   | `(date: Date) => void` |         | Callback fired when selecting day. |
+| `textStyle` | `object` or `any[]`    |         | text style for day.                |

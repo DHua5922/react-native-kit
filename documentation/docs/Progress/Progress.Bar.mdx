@@ -1,0 +1,39 @@
+---
+sidebar_position: 1
+---
+
+# Progress.Bar
+
+Show progress of some activity with a bar.
+
+## Import
+
+```jsx
+import { Progress } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [progress, setProgress] = useState(0);
+  setTimeout(() => setProgress(progress + 1), 500);
+  return (
+    <Progress.Bar color="blue" progress={progress} duration={500}>
+      {progress}%
+    </Progress.Bar>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Div](/docs/Div)
+:::
+
+| Name       | Type     | Default | Description                                       |
+| ---------- | -------- | ------- | ------------------------------------------------- |
+| `progress` | `number` |         | Current progress of activity.                     |
+| `duration` | `number` | 300     | Duration of moving bar animation in milliseconds. |
+| `color`    | `string` |         | Color of progress bar and text.                   |

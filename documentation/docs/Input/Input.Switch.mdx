@@ -1,0 +1,52 @@
+---
+sidebar_position: 1
+---
+
+# Input.Switch
+
+## Import
+
+```jsx
+import { Input } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [checked1, setChecked1] = useState(false);
+  const [checked2, setChecked2] = useState(false);
+
+  return (
+    <>
+      <Input.Switch
+        checked={checked1}
+        onChange={(checked) => setChecked1(checked)}
+        style={{ marginBottom: 12 }}
+      >
+        Switch 1
+      </Input.Switch>
+
+      <Input.Switch
+        checked={checked2}
+        onChange={(checked) => setChecked2(checked)}
+        disabled
+      >
+        Disabled switch
+      </Input.Switch>
+    </>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Pressable](https://reactnative.dev/docs/pressable)
+:::
+
+| Name       | Type                         | Default | Description                                  |
+| ---------- | ---------------------------- | ------- | -------------------------------------------- |
+| `checked`  | `boolean`                    |         | Turn on switch; otherwise, turn off switch.  |
+| `onChange` | `(checked: boolean) => void` |         | Callback fired when switch has been pressed. |
+| `size`     | `number`                     | 18      | Width and height of switch.                  |

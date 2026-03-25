@@ -1,0 +1,43 @@
+---
+sidebar_position: 1
+---
+
+# Tabs
+
+## Import
+
+```jsx
+import { Tabs } from "react-native-kit";
+```
+
+## Examples
+
+```jsx
+function Example() {
+  const [activeKey, setActiveKey] = useState("one");
+  return (
+    <Tabs activeKey={activeKey} onSelect={(key) => setActiveKey(key)}>
+      <Tab eventKey="one" title="One">
+        Content for tab 1
+      </Tab>
+      <Tab eventKey="two" title="Two">
+        Content for tab 2
+      </Tab>
+      <Tab eventKey="three" title="Three" disabled>
+        Content for tab 3
+      </Tab>
+    </Tabs>
+  );
+}
+```
+
+## Props
+
+:::note
+Include all props from [Div](/docs/Div)
+:::
+
+| Name        | Type                         | Default | Description                        |
+| ----------- | ---------------------------- | ------- | ---------------------------------- |
+| `activeKey` | `string`                     |         | Key of chosen tab.                 |
+| `onSelect`  | `(eventKey: string) => void` |         | Callback fired when selecting tab. |
