@@ -30,8 +30,10 @@ jobs:
           cache: yarn
           cache-dependency-path: documentation/yarn.lock
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup Yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
 
       # Install npm package for component library and update package.json file to use that component library, instead of local library
       - name: Install npm package for react-native-kit
@@ -41,7 +43,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: documentation
-        run: yarn install --immutable
+        run: yarn install --frozen-lockfile
 
       - name: Build website
         working-directory: documentation
