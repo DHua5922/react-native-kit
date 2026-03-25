@@ -12,7 +12,7 @@ import { Form } from "react-native-kit";
 
 ## Examples
 
-```jsx
+```jsx live
 function Example() {
   const [text, setText] = useState("");
   const [submittedText, setSubmittedText] = useState("");
@@ -25,7 +25,6 @@ function Example() {
           placeholder="Enter text here"
           value={text}
           onChange={(text) => setText(text)}
-          style={{ marginVertical: 10 }}
         />
         <Form.Button style={{ marginBottom: 10 }}>Submit</Form.Button>
       </Form>

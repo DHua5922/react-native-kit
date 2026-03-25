@@ -11,7 +11,6 @@
   ],
   "scripts": {
     "start": "rm -rf node_modules && yarn && yarn build && cd documentation && rm -rf node_modules && yarn && yarn start",
-    "start-interactive": "rm -rf node_modules && yarn && yarn build && cd documentation-interactive && rm -rf node_modules && yarn && yarn start",
     "build": "rm -rf dist && tsc && babel dist --out-dir dist --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
