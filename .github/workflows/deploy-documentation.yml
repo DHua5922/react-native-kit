@@ -34,10 +34,10 @@ jobs:
         run: corepack enable
 
       # Install npm package for component library and update package.json file to use that component library, instead of local library
-      - name: Install npm package for js-ts-kit
+      - name: Install npm package for react-native-kit
         run: |
           cd documentation
-          yarn add js-ts-kit
+          yarn add react-native-kit
 
       - name: Install dependencies
         working-directory: documentation

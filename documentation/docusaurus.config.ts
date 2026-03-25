@@ -1,9 +1,15 @@
+// @ts-check
+// `@type` JSDoc annotations allow editor autocompletion and type checking
+// (when paired with `@ts-check`).
+// There are various equivalent ways to declare your Docusaurus config.
+// See: https://docusaurus.io/docs/api/docusaurus-config
+
+import path from "path";
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 const githubUsername = "DHua5922";
-const libraryName = "react-native-kit";
+const libraryName = "js-ts-kit";
 const githubLink = `https://github.com/${githubUsername}/${libraryName}`;
 
 const config: Config = {
@@ -19,6 +25,7 @@ const config: Config = {
   // Set the production url of your site here
   url: `https://${githubUsername}.github.io`,
   // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: `/${libraryName}/`,
 
   // GitHub pages deployment config.
@@ -27,7 +34,7 @@ const config: Config = {
   projectName: libraryName, // Usually your repo name.
 
   onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenMarkdownLinks: "throw",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -37,6 +44,26 @@ const config: Config = {
     locales: ["en"],
   },
   themes: ["@docusaurus/theme-live-codeblock"],
+  plugins: [
+    function reactNativeWebCompatPlugin() {
+      return {
+        name: "react-native-web-compat",
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                "react-native$": require.resolve("react-native-web"),
+                "@expo/vector-icons$": path.resolve(
+                  __dirname,
+                  "./src/shims/expoVectorIcons.tsx",
+                ),
+              },
+            },
+          };
+        },
+      };
+    },
+  ],
   presets: [
     [
       "classic",

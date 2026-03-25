@@ -42,7 +42,7 @@ function Homepage() {
               <Col xs={12} md={6}>
                 <Feature
                   title="Easy to Use"
-                  description={`No other configuration or setup is needed. This reduces the time to get started and the complexity of the project. The library is more appealing to use because of that.`}
+                  description={`No other configuration or setup is needed. This reduces the time to get started and the complexity of the project.`}
                 />
               </Col>
               <Col xs={12} md={6}>
@@ -60,7 +60,7 @@ function Homepage() {
               <Col xs={12} md={6}>
                 <Feature
                   title="Actively Maintained"
-                  description="This library is constantly being updated and maintained. This ensures that the library is always up to date and that any issues are resolved quickly."
+                  description="This library is constantly being updated and maintained so that the library is always up to date."
                 />
               </Col>
             </Row>
