@@ -1,6 +1,6 @@
 {
   "name": "react-native-kit",
-  "version": "7.1.2",
+  "version": "0.0.0",
   "description": "React Native component library",
   "main": "dist/index.js",
   "module": "dist/index.js",
