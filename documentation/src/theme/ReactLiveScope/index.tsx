@@ -25,7 +25,7 @@ import {
   Tabs,
   useResponsiveUnits,
   rem,
-} from "react-native-kit";
+} from "@dhua5922/react-native-kit";
 import {
   addDays,
   eachDayOfInterval,

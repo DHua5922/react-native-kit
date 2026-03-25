@@ -16,18 +16,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CFBSTexas/cfbsstrap-native.git"
+    "url": "https://github.com/DHua5922/react-native-kit"
   },
   "keywords": [
     "React",
     "Native"
   ],
-  "author": "",
+  "author": "Dylan Hua",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CFBSTexas/cfbsstrap-native/issues"
+    "url": "https://github.com/DHua5922/react-native-kit/issues"
   },
-  "homepage": "https://github.com/CFBSTexas/cfbsstrap-native#readme",
+  "homepage": "https://www.huadylan.com/react-native-kit",
   "devDependencies": {
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.4",

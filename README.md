@@ -4,4 +4,4 @@ A reusable React Native toolkit that provides UI components, hooks, and helpers 
 
 ## Installation
 
-Enter `yarn add js-ts-kit`.
+Enter `yarn add @dhua5922/react-native-kit`.

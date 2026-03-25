@@ -9,7 +9,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 
 const githubUsername = "DHua5922";
-const libraryName = "js-ts-kit";
+const libraryName = "react-native-kit";
 const githubLink = `https://github.com/${githubUsername}/${libraryName}`;
 
 const config: Config = {
