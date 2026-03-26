@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Menu
 
+Show dropdown menu.
+
 ## Import
 
 ```jsx
@@ -14,11 +16,25 @@ import { Menu } from "@dhua5922/react-native-kit";
 
 ```jsx live
 function Example() {
+  const [pressedItem, setPressedItem] = useState("");
   return (
-    <Menu>
-      <Menu.Item>Option 1</Menu.Item>
-      <Menu.Item>Option 2</Menu.Item>
-    </Menu>
+    <>
+      <Menu>
+        <Menu.Toggle>
+          <Button>Button</Button>
+        </Menu.Toggle>
+
+        <Menu.Content>
+          {["Item 1", "Item 2"].map((item) => (
+            <Menu.Item onPress={() => setPressedItem(item)}>{item}</Menu.Item>
+          ))}
+        </Menu.Content>
+      </Menu>
+
+      <Text>
+        <Text bold>Pressed Item:</Text> {pressedItem}
+      </Text>
+    </>
   );
 }
 ```
@@ -26,5 +42,13 @@ function Example() {
 ## Props
 
 :::note
-Include all props from [Div](/docs/Div)
+Include all props from [Menu.Content](/docs/Menu/Menu.Content)
 :::
+| Name | Type | Default | Description |
+| ------------------------- | --------- | ------- | ------------------------------------------ |
+| `showMenu` | `boolean` | `false` | Indicator to show menu or not. |
+| `defaultShowMenu` | `boolean` | `false` | Indicator to show menu by default |
+| `onShow` | `() => void` | | Callback fired when showing menu for icon. |
+| `onHide` | `() => void` | | Callback fired when hiding menu for icon. |
+| `offsetMenuPosHorizontal` | `number` | 0 | Offset for horizontal position of menu |
+| `offsetMenuPosVertical` | `number` | 0 | Offset for vertical position of menu |

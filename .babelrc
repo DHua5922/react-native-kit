@@ -1,7 +1,0 @@
-{
-  "presets": [
-    "@babel/preset-env", // Transpile modern JavaScript
-    "@babel/preset-react", // Handle JSX syntax
-    "@babel/preset-typescript" // Handle TypeScript and .tsx files
-  ]
-}

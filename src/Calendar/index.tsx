@@ -7,26 +7,17 @@ import CalendarRight from "./CalendarRight";
 import CalendarTitle from "./CalendarTitle";
 import CalendarWeekday from "./CalendarWeekday";
 import CalendarWeekdays from "./CalendarWeekdays";
+import createCompoundComponent from "../internal/createCompoundComponent";
 
-interface Calendar extends React.FC<any> {
-  Day: typeof CalendarDay;
-  Days: typeof CalendarDays;
-  Header: typeof CalendarHeader;
-  Left: typeof CalendarLeft;
-  Right: typeof CalendarRight;
-  Title: typeof CalendarTitle;
-  Weekday: typeof CalendarWeekday;
-  Weekdays: typeof CalendarWeekdays;
-}
-
-const Calendar = CalendarParent as unknown as Calendar;
-Calendar.Day = CalendarDay;
-Calendar.Days = CalendarDays;
-Calendar.Header = CalendarHeader;
-Calendar.Left = CalendarLeft;
-Calendar.Right = CalendarRight;
-Calendar.Title = CalendarTitle;
-Calendar.Weekdays = CalendarWeekdays;
-Calendar.Weekday = CalendarWeekday;
+const Calendar = createCompoundComponent(CalendarParent, {
+  Day: CalendarDay,
+  Days: CalendarDays,
+  Header: CalendarHeader,
+  Left: CalendarLeft,
+  Right: CalendarRight,
+  Title: CalendarTitle,
+  Weekday: CalendarWeekday,
+  Weekdays: CalendarWeekdays,
+});
 
 export default Calendar;

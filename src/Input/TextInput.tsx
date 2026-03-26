@@ -2,6 +2,7 @@ import React, { ForwardedRef, forwardRef, useEffect, useState } from "react";
 import { TextInput as RnTextInput } from "react-native";
 import styled from "styled-components/native";
 import Row from "../Row";
+import { callHandler } from "../internal/callbacks";
 
 interface Props {
   leftChildren?: React.ReactNode;
@@ -35,8 +36,6 @@ const ContainerInput = styled(RnTextInput)`
   padding: 8px;
   height: 100%;
   width: 100%;
-  outline-width: 0px;
-  text-overflow: ellipsis;
 `;
 const Container = Object.assign(ContainerParent, { Input: ContainerInput });
 
@@ -72,20 +71,20 @@ function TextInput(
           {...props}
           onFocus={(evt: any) => {
             if (!disabled) {
-              onFocus && onFocus(evt);
+              callHandler(onFocus, evt);
               setIsFocused(true);
             }
           }}
           onBlur={(evt: any) => {
             if (!disabled) {
-              onBlur && onBlur(evt);
+              callHandler(onBlur, evt);
               setIsFocused(false);
             }
           }}
           onChangeText={(text: string) => {
             if (!disabled) {
-              onChange && onChange(text);
-              onChangeText && onChangeText(text);
+              callHandler(onChange, text);
+              callHandler(onChangeText, text);
             }
           }}
         />

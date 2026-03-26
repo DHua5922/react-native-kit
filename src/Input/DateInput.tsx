@@ -6,6 +6,8 @@ import Menu from "../Menu";
 import TextInput from "./TextInput";
 import Popup from "../Popup";
 import styled from "styled-components/native";
+import { callHandler } from "../internal/callbacks";
+import { measurePopupPosition } from "../internal/popup";
 
 interface Props {
   value: string;
@@ -41,21 +43,9 @@ function DateInput({ children, rightChildren, ...props }: Props) {
           <Pressable
             onPress={() => {
               setShowCalendar(true);
-              ref.current?.measure(
-                (
-                  x: number,
-                  y: number,
-                  width: number,
-                  height: number,
-                  pageX: number,
-                  pageY: number
-                ) =>
-                  setCalendarPos({
-                    top: `${pageY + height}px`,
-                    left: `${pageX}px`,
-                    width: `${width}px`,
-                  })
-              );
+              measurePopupPosition(ref, setCalendarPos, {
+                includeWidth: true,
+              });
             }}
             disabled={props.disabled}
           >
@@ -76,8 +66,7 @@ function DateInput({ children, rightChildren, ...props }: Props) {
           {React.cloneElement(parentChildren, {
             ...parentChildren.props,
             onChange: (value: any) => {
-              parentChildren.props.onChange &&
-                parentChildren.props.onChange(value);
+              callHandler(parentChildren.props.onChange, value);
               setShowCalendar(false);
             },
           })}

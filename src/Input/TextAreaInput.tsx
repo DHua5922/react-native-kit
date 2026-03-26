@@ -1,5 +1,6 @@
 import React, { ForwardedRef, forwardRef } from "react";
 import TextInput from "./TextInput";
+import { callHandler } from "../internal/callbacks";
 
 interface Props {
   children?: React.ReactNode;
@@ -17,8 +18,8 @@ function TextAreaInput(
       ref={ref}
       {...props}
       onChangeText={(text: string) => {
-        onChangeText && onChangeText(text);
-        onChange && onChange(text);
+        callHandler(onChangeText, text);
+        callHandler(onChange, text);
       }}
       multiline
     >

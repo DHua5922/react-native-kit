@@ -9,8 +9,9 @@ import DateInput from "./DateInput";
 import TextInput from "./TextInput";
 import NumberInput from "./NumberInput";
 import TextAreaInput from "./TextAreaInput";
+import createCompoundComponent from "../internal/createCompoundComponent";
 
-interface Input extends React.FC<any> {
+type InputCompound = typeof InputParent & {
   Switch: typeof Switch;
   Dropdown: typeof DropdownInput;
   Radio: typeof Radio;
@@ -21,18 +22,19 @@ interface Input extends React.FC<any> {
   Date: typeof DateInput;
   Number: typeof NumberInput;
   TextArea: typeof TextAreaInput;
-}
+};
 
-const Input = InputParent as unknown as Input;
-Input.Switch = Switch;
-Input.Dropdown = DropdownInput;
-Input.Radio = Radio;
-Input.Search = SearchInput;
-Input.Select = SelectInput;
-Input.Text = TextInput;
-Input.Checkbox = Checkbox;
-Input.Date = DateInput;
-Input.Number = NumberInput;
-Input.TextArea = TextAreaInput;
+const Input: InputCompound = createCompoundComponent(InputParent, {
+  Switch: Switch,
+  Dropdown: DropdownInput,
+  Radio: Radio,
+  Search: SearchInput,
+  Select: SelectInput,
+  Text: TextInput,
+  Checkbox: Checkbox,
+  Date: DateInput,
+  Number: NumberInput,
+  TextArea: TextAreaInput,
+});
 
 export default Input;

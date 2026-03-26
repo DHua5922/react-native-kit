@@ -1,12 +1,9 @@
-import React from "react";
 import ButtonParent from "./Button";
 import CloseButton from "./CloseButton";
+import createCompoundComponent from "../internal/createCompoundComponent";
 
-interface Button extends React.FC<any> {
-  Close: typeof CloseButton;
-}
-
-const Button = ButtonParent as Button;
-Button.Close = CloseButton;
+const Button = createCompoundComponent(ButtonParent, {
+  Close: CloseButton,
+});
 
 export default Button;

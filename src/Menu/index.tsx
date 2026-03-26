@@ -1,14 +1,13 @@
 import MenuParent from "./Menu";
 import MenuItem from "./MenuItem";
+import MenuContent from "./MenuContent";
 import MenuToggle from "./MenuToggle";
+import createCompoundComponent from "../internal/createCompoundComponent";
 
-interface Menu extends React.FC<any> {
-  Item: typeof MenuItem;
-  Toggle: typeof MenuToggle;
-}
-
-const Menu = MenuParent as unknown as Menu;
-Menu.Item = MenuItem;
-Menu.Toggle = MenuToggle;
+const Menu = createCompoundComponent(MenuParent, {
+  Content: MenuContent,
+  Item: MenuItem,
+  Toggle: MenuToggle,
+});
 
 export default Menu;

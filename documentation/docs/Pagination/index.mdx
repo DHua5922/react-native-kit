@@ -274,17 +274,7 @@ function PaginatedList() {
         <Table.tr>
           {tableHeaders.map((header, columnIndex) => (
             <Table.th key={columnIndex}>
-              <Menu.Toggle
-                Toggle={
-                  <Row>
-                    <Text bold>{header.columnName} </Text>
-                    {(header.isCheckingEqual || header.isCheckingContains) && (
-                      <FontAwesome5 name="filter" size={20} />
-                    )}
-                    {header.isSortAscending && "↑"}
-                    {header.isSortDescending && "↓"}
-                  </Row>
-                }
+              <Menu
                 showMenu={header.showMenu}
                 onShowMenu={() =>
                   modifyTableHeader({ showMenu: true }, columnIndex)
@@ -293,7 +283,19 @@ function PaginatedList() {
                   modifyTableHeader({ showMenu: false }, columnIndex)
                 }
               >
-                {[
+                <Menu.Toggle
+                >
+                  <Row>
+                    <Text bold>{header.columnName} </Text>
+                    {(header.isCheckingEqual || header.isCheckingContains) && (
+                      <FontAwesome5 name="filter" size={20} />
+                    )}
+                    {header.isSortAscending && "↑"}
+                    {header.isSortDescending && "↓"}
+                  </Row>
+                </Menu.Toggle>
+                <Menu.Content>
+                  {[
                   {
                     label: "Clear Filter",
                     active: false,
@@ -363,21 +365,21 @@ function PaginatedList() {
                         columnIndex,
                       ),
                   },
-                ].map(({ label, onPress, active }, index) => (
-                  <Menu.Item key={index}>
-                    <Pressable
-                      onPress={() => {
-                        onPress();
-                        setCurrentPage(0);
-                      }}
-                    >
-                      {active && "-> "}
-                      {label}
-                    </Pressable>
-                  </Menu.Item>
-                ))}
+                  ].map(({ label, onPress, active }, index) => (
+                    <Menu.Item key={index}>
+                      <Pressable
+                        onPress={() => {
+                          onPress();
+                          setCurrentPage(0);
+                        }}
+                      >
+                        {active && "-> "}
+                        {label}
+                      </Pressable>
+                    </Menu.Item>
+                  ))}
 
-                <Menu.Item>
+                  <Menu.Item>
                   <Input.Search
                     placeholder="Type filter value here"
                     value={header.filterValue}
@@ -390,48 +392,49 @@ function PaginatedList() {
                       );
                     }}
                   />
-                </Menu.Item>
+                  </Menu.Item>
 
-                <Menu.Item onPress={() => {}}>
-                  <Row style={{ justifyContent: "flex-end" }}>
-                    <Button
-                      style={{ marginRight: 8 }}
-                      onPress={() => {
-                        setFilteredList(
-                          filterList(
-                            header.isSortAscending,
-                            header.isSortDescending,
-                            header.propertyName,
-                          ),
-                        );
-                        modifyTableHeader(
-                          {
-                            isCheckingEqual: header.pickedEqualCheck,
-                            isCheckingContains: header.pickedContainsCheck,
-                            showMenu: false,
-                          },
-                          columnIndex,
-                        );
-                      }}
-                    >
-                      OK
-                    </Button>
+                  <Menu.Item onPress={() => {}}>
+                    <Row style={{ justifyContent: "flex-end" }}>
+                      <Button
+                        style={{ marginRight: 8 }}
+                        onPress={() => {
+                          setFilteredList(
+                            filterList(
+                              header.isSortAscending,
+                              header.isSortDescending,
+                              header.propertyName,
+                            ),
+                          );
+                          modifyTableHeader(
+                            {
+                              isCheckingEqual: header.pickedEqualCheck,
+                              isCheckingContains: header.pickedContainsCheck,
+                              showMenu: false,
+                            },
+                            columnIndex,
+                          );
+                        }}
+                      >
+                        OK
+                      </Button>
 
-                    <Button
-                      onPress={() => {
-                        modifyTableHeader(
-                          {
-                            showMenu: false,
-                          },
-                          columnIndex,
-                        );
-                      }}
-                    >
-                      CANCEL
-                    </Button>
-                  </Row>
-                </Menu.Item>
-              </Menu.Toggle>
+                      <Button
+                        onPress={() => {
+                          modifyTableHeader(
+                            {
+                              showMenu: false,
+                            },
+                            columnIndex,
+                          );
+                        }}
+                      >
+                        CANCEL
+                      </Button>
+                    </Row>
+                  </Menu.Item>
+                </Menu.Content>
+              </Menu>
             </Table.th>
           ))}
         </Table.tr>

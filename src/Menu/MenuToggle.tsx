@@ -1,100 +1,68 @@
-import { Feather } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
-import { rem } from "../utilities/responsive";
-import { Pressable } from "react-native";
-import Row from "../Row";
-import Popup from "../Popup";
-import Menu from "./Menu";
+import React, { useContext, useRef } from "react";
+import {
+  GestureResponderEvent,
+  Pressable,
+  PressableProps,
+  View,
+} from "react-native";
+import { callHandler } from "../internal/callbacks";
+import { measurePopupPosition } from "../internal/popup";
+import Text from "../Text";
+import MenuContext from "./MenuContext";
 
-interface Props {
-  Icon?: any;
-  IconName?: string;
+interface Props extends Omit<PressableProps, "children"> {
   children?: React.ReactNode;
-  Toggle?: React.ReactNode;
-  showMenu?: boolean;
-  onShowMenu: () => void;
-  onHideMenu: () => void;
-  offsetMenuPosVertical?: number;
-  offsetMenuPosHorizontal?: number;
-  [key: string]: any;
 }
 
-function MenuToggle({
-  Icon,
-  IconName = "more-vertical",
-  children,
-  Toggle,
-  showMenu,
-  onShowMenu,
-  onHideMenu,
-  offsetMenuPosVertical,
-  offsetMenuPosHorizontal,
-  ...props
-}: Props) {
-  const IconComponent = Icon || Feather;
-  const [menuPos, setMenuPos] = useState({
-    top: "auto",
-    left: "auto",
-  });
-  const buttonRef = useRef(null);
+function MenuToggle({ children, onPress, ...props }: Props) {
+  const context = useContext(MenuContext);
+  const triggerRef = useRef<View>(null);
+
+  if (!context) {
+    return null;
+  }
+
+  const handlePress: NonNullable<PressableProps["onPress"]> = (event) => {
+    callHandler(onPress || undefined, event);
+    callHandler(context.onShowMenu);
+    measurePopupPosition(triggerRef, context.setMenuPos, {
+      offsetTop: context.offsetMenuPosVertical,
+      offsetLeft: context.offsetMenuPosHorizontal,
+    });
+  };
+
+  const triggerProps: PressableProps = {
+    ...props,
+    accessibilityRole: props.accessibilityRole || "button",
+    onPress: handlePress,
+  };
+
+  if (React.isValidElement(children)) {
+    const child = children as React.ReactElement<PressableProps>;
+    const childProps = child.props;
+
+    return (
+      <View ref={triggerRef} collapsable={false}>
+        {React.cloneElement(child, {
+          ...triggerProps,
+          ...childProps,
+          accessibilityRole:
+            childProps.accessibilityRole || triggerProps.accessibilityRole,
+          onPress: (event: GestureResponderEvent) => {
+            callHandler(childProps.onPress || undefined, event);
+            callHandler(triggerProps.onPress || undefined, event);
+          },
+        })}
+      </View>
+    );
+  }
 
   return (
-    <>
-      <Row>
-        <Pressable
-          ref={buttonRef}
-          onPress={() => {
-            onShowMenu && onShowMenu();
-            (buttonRef.current as any)?.measure(
-              (
-                x: number,
-                y: number,
-                width: number,
-                height: number,
-                pageX: number,
-                pageY: number
-              ) =>
-                setMenuPos({
-                  top: `${pageY + height + (offsetMenuPosVertical || 0)}px`,
-                  left: `${pageX + (offsetMenuPosHorizontal || 0)}px`,
-                })
-            );
-          }}
-        >
-          {Toggle || (
-            <IconComponent
-              name={IconName}
-              color="#000000"
-              size={rem(2)}
-              {...props}
-            />
-          )}
-        </Pressable>
-      </Row>
-
-      <Popup
-        {...menuPos}
-        visible={showMenu}
-        onShow={onShowMenu}
-        onHide={onHideMenu}
-      >
-        <Menu>
-          {React.Children.map(
-            children as React.ReactElement<any>[],
-            (child: React.ReactElement<any>) =>
-              React.cloneElement(child, {
-                ...child.props,
-                onPress: (event: any) => {
-                  if (child.props.onPress) {
-                    child.props.onPress(event);
-                    onHideMenu && onHideMenu();
-                  }
-                },
-              })
-          )}
-        </Menu>
-      </Popup>
-    </>
+    <View ref={triggerRef} collapsable={false}>
+      <Pressable {...triggerProps}>
+        <Text>{children}</Text>
+      </Pressable>
+    </View>
   );
 }
 
