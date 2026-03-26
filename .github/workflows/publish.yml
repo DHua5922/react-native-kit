@@ -3,10 +3,10 @@ name: Publish Package
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 permissions:
-  id-token: write  # Required for OIDC
+  id-token: write
   contents: read
 
 jobs:
@@ -17,11 +17,13 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
           scope: "@dhua5922"
-          cache: 'yarn'
+          cache: "yarn"
       - run: yarn install --frozen-lockfile
+      - name: Set package version from tag
+        run: npm pkg set version="${GITHUB_REF_NAME#v}"
       - run: yarn build
       - run: yarn test
-      - run: npm publish --provenance --access public
+      - run: npm publish --access public
