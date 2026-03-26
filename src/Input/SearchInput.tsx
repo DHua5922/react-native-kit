@@ -4,6 +4,7 @@ import TextInput from "./TextInput";
 import { rem } from "../utilities/responsive";
 import { Pressable } from "react-native";
 import styled from "styled-components/native";
+import { callHandler } from "../internal/callbacks";
 
 interface Props {
   onChangeText?: (text: string) => void;
@@ -37,8 +38,8 @@ function SearchInput(
         props.value ? (
           <Pressable
             onPress={() => {
-              onChangeText && onChangeText("");
-              onChange && onChange("");
+              callHandler(onChangeText, "");
+              callHandler(onChange, "");
             }}
           >
             <ClearIcon name="clear" {...iconProps} />
@@ -47,8 +48,8 @@ function SearchInput(
       }
       {...props}
       onChangeText={(text: string) => {
-        onChangeText && onChangeText(text);
-        onChange && onChange(text);
+        callHandler(onChangeText, text);
+        callHandler(onChange, text);
       }}
     />
   );

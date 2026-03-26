@@ -1,5 +1,6 @@
 import React, { ForwardedRef, forwardRef } from "react";
 import TextInput from "./TextInput";
+import { callHandler } from "../internal/callbacks";
 
 interface Props {
   children?: React.ReactNode;
@@ -18,8 +19,8 @@ function NumberInput(
       {...props}
       onChangeText={(input: string) => {
         const numericInput = input.replace(/[^0-9]/g, "");
-        onChangeText && onChangeText(numericInput);
-        onChange && onChange(numericInput);
+        callHandler(onChangeText, numericInput);
+        callHandler(onChange, numericInput);
       }}
     >
       {children}

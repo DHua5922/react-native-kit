@@ -1,11 +1,9 @@
 import AnimationParent from "./Animation";
 import FadeInAnimation from "./FadeInAnimation";
+import createCompoundComponent from "../internal/createCompoundComponent";
 
-interface Animation extends React.FC<any> {
-  FadeIn: typeof FadeInAnimation;
-}
-
-const Animation = AnimationParent as Animation;
-Animation.FadeIn = FadeInAnimation;
+const Animation = createCompoundComponent(AnimationParent, {
+  FadeIn: FadeInAnimation,
+});
 
 export default Animation;

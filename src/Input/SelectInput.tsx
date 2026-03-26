@@ -5,6 +5,8 @@ import { rem } from "../utilities/responsive";
 import TextInput from "./TextInput";
 import Popup from "../Popup";
 import Menu from "../Menu";
+import { callHandler } from "../internal/callbacks";
+import { measurePopupPosition } from "../internal/popup";
 
 interface Props {
   children?: React.ReactNode;
@@ -32,21 +34,9 @@ function SelectInput({ children, onChange, onChangeText, ...props }: Props) {
       ref={DropdownButton}
       onPress={() => {
         setShowDropdownMenu(true);
-        DropdownButton.current?.measure(
-          (
-            x: number,
-            y: number,
-            width: number,
-            height: number,
-            pageX: number,
-            pageY: number
-          ) =>
-            setDropdownMenuPos({
-              top: `${pageY + height}px`,
-              left: `${pageX}px`,
-              width: `${width}px`,
-            })
-        );
+        measurePopupPosition(DropdownButton, setDropdownMenuPos, {
+          includeWidth: true,
+        });
       }}
       disabled={props.disabled}
     >
@@ -59,8 +49,8 @@ function SelectInput({ children, onChange, onChangeText, ...props }: Props) {
         }
         {...props}
         onChangeText={(text: string) => {
-          onChange && onChange(text);
-          onChangeText && onChangeText(text);
+          callHandler(onChange, text);
+          callHandler(onChangeText, text);
         }}
       />
 
@@ -75,8 +65,10 @@ function SelectInput({ children, onChange, onChangeText, ...props }: Props) {
             React.cloneElement(child as React.ReactElement<any>, {
               ...(child as React.ReactElement<any>).props,
               onPress: (event: any) => {
-                (child as React.ReactElement<any>).props.onPress &&
-                  (child as React.ReactElement<any>).props.onPress(event);
+                callHandler(
+                  (child as React.ReactElement<any>).props.onPress,
+                  event
+                );
                 setShowDropdownMenu(false);
               },
             })

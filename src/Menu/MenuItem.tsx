@@ -1,13 +1,13 @@
 import styled from "styled-components/native";
 import Div from "../Div";
 import React from "react";
-import { Pressable } from "react-native";
+import { Pressable, PressableProps } from "react-native";
 
-interface Props {
-  children: React.ReactNode;
-  style?: object | any[];
-  [key: string]: any;
+interface CustomProps {
+  style?: CSSStyleDeclaration;
 }
+
+type Props = CustomProps & PressableProps;
 
 const SDiv = styled(Div)`
   padding: 8px;
